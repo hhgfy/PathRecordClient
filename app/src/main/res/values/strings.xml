@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LoginDemo</string>
+    <string name="textusername">输入用户名</string>
+    <string name="textpassword">输入密 码</string>
+</resources>
