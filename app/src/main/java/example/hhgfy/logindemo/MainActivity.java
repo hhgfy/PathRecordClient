@@ -30,6 +30,8 @@ import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 
+import org.json.JSONObject;
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -105,7 +107,8 @@ public class MainActivity extends Activity implements LocationSource, AMapLocati
 					DecimalFormat decimalFormat = new DecimalFormat("0.0");
 					mResultShow.setText(
 							decimalFormat.format( getDistance(record.getPathline()) ) + "米");
-					//保存结果到数据库
+
+					//保存结果到 本地数据库 & 上传数据
 					saveRecord(record.getPathline(), record.getDate());
 				}
 			}
@@ -129,11 +132,12 @@ public class MainActivity extends Activity implements LocationSource, AMapLocati
 			String endpoint = amapLocationToString(lastLocaiton);
 			String username=sp.getString("username",null);
 
-			//插入一条路径记录
+			//插入一条路径记录  到本地
 			DbHepler.createrecord(username, String.valueOf(distance), duration, average,
 					pathlineSring, stratpoint, endpoint, time);
 			DbHepler.close();
 
+			//上传一条路径记录到 服务器
 			postData(username, String.valueOf(distance), duration, average,
 					pathlineSring, stratpoint, endpoint, time);
 
@@ -145,6 +149,7 @@ public class MainActivity extends Activity implements LocationSource, AMapLocati
 		}
 	}
 
+	//post请求 上传路径数据
 	private void postData(final String username, final String distance, final String duration,
 						  final String averagespeed, final String pathline, final String startpoint,
 						  final String endpoint, final String date) {
@@ -173,11 +178,19 @@ public class MainActivity extends Activity implements LocationSource, AMapLocati
 
 					HttpUtil httpUtil = new HttpUtil();
 					String responseData = httpUtil.post(url, formBody);
-					Log.d("responseData","------------------\n\n"+responseData);
+					Log.d("responseData","------------------\n\n上传数据 ，响应为"+responseData);
 
-					if ("1".equals(responseData)){
+					JSONObject response=new JSONObject(responseData);
+					String resState =response.getString("state");
+					String resMsg=response.getString("msg");
+
+
+					if ("success".equals(resState)){
+						Log.d("msg",resMsg);
 						Toast.makeText(MainActivity.this, "上传路径成功", Toast.LENGTH_SHORT).show();
-					}else  if ("0".equals(responseData)){
+
+					}else  if ("fail".equals(resState)){
+						Log.d("msg",resMsg);
 						Toast.makeText(MainActivity.this, "上传路径失败", Toast.LENGTH_SHORT).show();
 					}
 

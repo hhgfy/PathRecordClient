@@ -4,19 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/back"
+
     tools:context="example.hhgfy.logindemo.LoginActivity">
+    <!--android:background="@color/back"-->
+
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="165dp"
-        android:layout_height="0dp"
+        android:layout_width="213dp"
+        android:layout_height="91dp"
         android:layout_marginBottom="190dp"
         android:layout_marginTop="26dp"
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/head" />
 
     <EditText
@@ -47,29 +51,47 @@
 
     <Button
         android:id="@+id/login_btn"
-        android:layout_width="207dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginBottom="52dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="85dp"
         android:background="@color/btn_color"
         android:text="登录"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintEnd_toStartOf="@+id/registe_btn"
+        app:layout_constraintHorizontal_bias="0.289"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.932" />
+
+    <Button
+        android:id="@+id/registe_btn"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="83dp"
+        android:background="@color/btn_color"
+        android:text="注册"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/login_btn" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="74dp"
         android:layout_marginBottom="108dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="310dp"
+        app:layout_constraintBottom_toTopOf="@+id/registe_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.21">
 
         <CheckBox
             android:id="@+id/login_rememberpassword"

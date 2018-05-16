@@ -27,6 +27,7 @@
             android:name="com.amap.api.v2.apikey"
             android:value="fe1eaedee0e558b8f1d5de332f2b14b5"/>
 
+        <!--登录-->
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +36,14 @@
             </intent-filter>
         </activity>
 
+        <!--注册-->
+        <activity
+            android:name=".RegisteActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!--定位界面-->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

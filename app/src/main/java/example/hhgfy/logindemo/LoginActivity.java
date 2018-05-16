@@ -15,6 +15,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import example.hhgfy.logindemo.Util.HttpUtil;
 import okhttp3.FormBody;
 
@@ -24,7 +26,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password_login;
     private CheckBox rememberpassword;
     private CheckBox autologin;
+
     private Button btn_login;
+    private Button btn_registe;
 
     private SharedPreferences sp;
     private String usernameValue;
@@ -44,7 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         password_login = findViewById(R.id.login_password);
         rememberpassword = findViewById(R.id.login_rememberpassword);
         autologin = findViewById(R.id.login_autologin);
+
         btn_login = findViewById(R.id.login_btn);
+        btn_registe=findViewById(R.id.registe_btn);
 
         //是否选中 记住密码
         if (sp.getBoolean("isCheck", false)) {
@@ -72,6 +78,17 @@ public class LoginActivity extends AppCompatActivity {
                 passwordValue = password_login.getText().toString();
 
                 login(usernameValue, passwordValue);
+            }
+        });
+
+        //点击注册按钮
+        btn_registe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("login","跳转到注册页");
+                Intent intent = new Intent(LoginActivity.this, RegisteActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -129,10 +146,18 @@ public class LoginActivity extends AppCompatActivity {
                     String responseData = httpUtil.post(url, formBody);
                     Log.d("responseData","------------------\n\n"+responseData);
 
-                    if ("1".equals(responseData)){
+                    //解析json 格式
+                    JSONObject response=new JSONObject(responseData);
+                    String resState =response.getString("state");
+                    String resMsg=response.getString("msg");
+
+
+                    if ("success".equals(resState)){
+                        Log.d("msg",resMsg);
                         msg.what=1;
 
-                    }else  if ("0".equals(responseData)){
+                    }else  if ("fail".equals(resState)){
+                        Log.d("msg",resMsg);
                         msg.what=0;
                     }
 
