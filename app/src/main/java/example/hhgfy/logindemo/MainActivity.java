@@ -39,7 +39,6 @@ import java.util.List;
 
 import example.hhgfy.logindemo.Util.HttpUtil;
 import example.hhgfy.logindemo.record.PathRecord;
-import example.hhgfy.logindemo.database.DbAdapter;
 import okhttp3.FormBody;
 //import amap.com.recorduitl.Util;
 
@@ -57,7 +56,7 @@ public class MainActivity extends Activity implements LocationSource, AMapLocati
 	private long mStartTime; //开始时间
 	private long mEndTime;
 	private ToggleButton btn; //开始/停止 按钮
-	private DbAdapter DbHepler; //数据库操作
+
 	private TextView mResultShow; //左上角显示路程
 	private SharedPreferences sp;
 
@@ -108,7 +107,7 @@ public class MainActivity extends Activity implements LocationSource, AMapLocati
 					mResultShow.setText(
 							decimalFormat.format( getDistance(record.getPathline()) ) + "米");
 
-					//保存结果到 本地数据库 & 上传数据
+					//保存结果 上传数据
 					saveRecord(record.getPathline(), record.getDate());
 				}
 			}
@@ -120,8 +119,7 @@ public class MainActivity extends Activity implements LocationSource, AMapLocati
 
 	protected void saveRecord(List<AMapLocation> list, String time) {
 		if (list != null && list.size() > 0) {
-			DbHepler = new DbAdapter(this);
-			DbHepler.open();
+
 			String duration = getDuration();
 			float distance = getDistance(list);
 			String average = getAverage(distance);
@@ -133,9 +131,9 @@ public class MainActivity extends Activity implements LocationSource, AMapLocati
 			String username=sp.getString("username",null);
 
 			//插入一条路径记录  到本地
-			DbHepler.createrecord(username, String.valueOf(distance), duration, average,
-					pathlineSring, stratpoint, endpoint, time);
-			DbHepler.close();
+//			DbHepler.createrecord(username, String.valueOf(distance), duration, average,
+//					pathlineSring, stratpoint, endpoint, time);
+//			DbHepler.close();
 
 			//上传一条路径记录到 服务器
 			postData(username, String.valueOf(distance), duration, average,

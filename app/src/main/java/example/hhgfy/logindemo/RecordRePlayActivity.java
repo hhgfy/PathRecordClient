@@ -39,7 +39,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import example.hhgfy.logindemo.Util.HttpUtil;
-import example.hhgfy.logindemo.database.DbAdapter;
+
 import example.hhgfy.logindemo.record.PathRecord;
 import example.hhgfy.logindemo.recorduitl.TraceRePlay;
 import example.hhgfy.logindemo.recorduitl.Util;

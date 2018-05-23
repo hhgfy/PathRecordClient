@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import example.hhgfy.logindemo.Util.HttpUtil;
-import example.hhgfy.logindemo.database.DbAdapter;
 import example.hhgfy.logindemo.record.PathRecord;
 
 
@@ -36,7 +35,7 @@ public class RecordActivity extends Activity implements OnItemClickListener {
 	private SharedPreferences sp;
 	private RecordAdapter mAdapter;
 	private ListView mAllRecordListView;
-	private DbAdapter mDataBaseHelper;
+
 //	private List<PathRecord> mAllRecord = new ArrayList<PathRecord>();
 	private List<PathRecord> recordByUser=new ArrayList<>();
 	public static final String RECORD_ID = "record_id";
@@ -51,12 +50,6 @@ public class RecordActivity extends Activity implements OnItemClickListener {
 		btn_logout=findViewById(R.id.logout_btn);
 		title=findViewById(R.id.title_center);
 
-		mDataBaseHelper = new DbAdapter(this);
-		mDataBaseHelper.open();
-//		searchAllRecordFromDB(); //查询数据库
-
-
-//		queryRecordByUsername(sp.getString("username",null));
 
 		getRecordListData(sp.getString("username",null));
 
@@ -64,10 +57,6 @@ public class RecordActivity extends Activity implements OnItemClickListener {
 			System.out.println(record.toString());
 		}
 
-//		mAdapter = new RecordAdapter(this, recordByUser);
-//		mAllRecordListView.setAdapter(mAdapter);
-//		mAllRecordListView.setOnItemClickListener(this);
-//
 
 		btn_logout.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -167,13 +156,6 @@ public class RecordActivity extends Activity implements OnItemClickListener {
 
 	}
 
-//	private void searchAllRecordFromDB() {
-//		mAllRecord = mDataBaseHelper.queryRecordAll();
-//	}
-
-	private void queryRecordByUsername(String username){
-		recordByUser=mDataBaseHelper.queryRecordByUsername(username);
-	}
 
 	public void onBackClick(View view) {
 		this.finish();
