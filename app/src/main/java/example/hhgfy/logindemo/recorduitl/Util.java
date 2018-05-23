@@ -47,6 +47,7 @@ public class Util {
 	 * @param list
 	 * @return
 	 */
+	//转换为经纬度坐标点集合
 	public static List<LatLng> parseLatLngList(List<AMapLocation> list) {
 		List<LatLng> traceList = new ArrayList<LatLng>();
 		if (list == null) {

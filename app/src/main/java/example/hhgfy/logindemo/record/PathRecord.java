@@ -20,6 +20,13 @@ public class PathRecord {
 
 	}
 
+	public PathRecord(int id,ArrayList<AMapLocation> lines, AMapLocation start,AMapLocation end) {
+		this.mId=id;
+		this.mPathLinePoints=lines;
+		this.mStartPoint=start;
+		this.mEndPoint=end;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -102,7 +109,7 @@ public class PathRecord {
 		float distance= Float.parseFloat(getDistance());
 		float duration= Float.parseFloat(getDuration());
 		StringBuilder record = new StringBuilder();
-		record.append("记录点数:" + getPathline().size() + ", ");
+//		record.append("记录点数:" + getPathline().size() + ", ");
 		record.append("路程:" + (int)distance + "m, ");
 		record.append("时长:" + (int)duration + "s");
 		return record.toString();

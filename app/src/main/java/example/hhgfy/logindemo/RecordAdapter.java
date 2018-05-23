@@ -59,5 +59,6 @@ public class RecordAdapter extends BaseAdapter {
 	private class ViewHolder {
 		TextView date;
 		TextView record;
+
 	}
 }
